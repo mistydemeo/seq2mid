@@ -1,0 +1,123 @@
+Saturn Sequence Version 2.00(1994.8.20) File Specifications (Revision 2)
+============================================================
+
+First 6 bytes are used only when declared as a Sequence bank. Everything is in Big Endian.
+
+0x01-0x02: Number of Songs in Sequence Bank
+0x03-0x05: Pointer to first song
+0xyy-0xzz: Pointer to second song, third song, etc. etc.
+
+0x06-0x07: Resolution. Same format and byte order as midi's.
+0x08-0x09: Number of Tempo events.
+0x0A-0x0B: Offset to first non-tempo event. 
+0x0C-0x0D: Offset to first tempo event in loop(according to SndSim)
+
+[Tempo Track Start]
+      First Tempo Track Entry
+0x0E: Step(Delta) Time
+0x0F: BPM
+   
+      Second Tempo Track Entry
+0x0F: Step(Delta) Time
+0x10: BPM
+
+      etc.
+
+[Normal Track Start]
+0x?? - see 0x0A-0x0B
+
+Normal Track Event List and Restrictions
+------------------------------------------
+Here's a short list of events used by the format. Step(Delta) information is stored at the end
+of an event, not before it like midi.
+
+0xFF 0x?? 0x?? 0x?? 0x?? 
+Meta Event. Supposedly used, but SndSim itself strips them.
+
+0xBw 0xxx 0xyy 0xzz 
+Control Change Event. w is the channel, xx is Control Change number, yy is the value(if 
+necessary), and zz is the step time. Control Change 32(for each change) must be at the top of 
+the normal track and before the Program Change Event. 
+
+0xCx 0xyy 0xzz
+Program Change Event. x is the channel, yy is the program, zz is the step time.
+
+0x00-0x7F 0xww 0xxx 0xyy 0xzz - Note On Event. This event takes a wee bit of explaining. The
+high nibble of the first byte is used as the ninth bit for gate and step time, plus one more
+unknown item. In the high nibble, the 2nd bit is the 9th bit for step time and 3rd bit is the 
+9th bit for gate time. The first bit is unknown. The low nibble is the actual channel. ww is the
+key number(same format as midi), xx is the volume, yy is the 1st-8th bit of gate time, and zz is
+the 1st-8th bit of step time. 
+
+"What is Gate time?" - It's a replacement for note off in a sense. It's basically a step(delta)
+count till a note off is issued. So it cuts down on file size.
+
+0x81 0xyyyy 0xzz
+Reference Event. This is how this format is able to really pack the data. Reference basically
+goes to an offset starting at the beginning of the normal track and offsets it by yyyy. It
+reuses zz events from that offset and jumps back to the old offset afterwards. 
+
+SPECIAL NOTE: You DO NOT count Gate and Step(Delta) Extend Events(although you still handle them). Ironically, 
+this was one of the only things correct in the original Sega document ;) 
+
+0x82 0xzz
+Loop Event. There will always be two calls of these. One at the start of the loop, and one
+at the end. zz is the step time. 
+
+0x83
+End of track event. This will always be at the end of the normal track. 
+
+0x88
+Gate Extend 0x200 Event. Add 0x200 onto the next Note On gate time value.
+
+0x89
+Gate Extend 0x800 Event. Add 0x800 onto the next Note On gate time value.
+
+0x8A
+Gate Extend 0x1000 Event. Add 0x1000 onto the next Note On gate time value.
+
+0x8B
+Gate Extend 0x2000 Event. Add 0x2000 onto the next Note On gate time value.
+
+0x8C
+Step(Delta) Extend 0x100 Event. Add 0x100 onto the next Note On step time value.
+
+0x8D
+Step(Delta) Extend 0x200 Event. Add 0x200 onto the next Note On step time value.
+
+0x8E
+Step(Delta) Extend 0x800 Event. Add 0x800 onto the next Note On step time value.
+
+0x8F
+Step(Delta) Extend 0x1000 Event. Add 0x1000 onto the next Note On step time value.
+
+0xAw 0xxx 0xyy 0xzz
+Polyphonic Pressure event(Aftertouch). w is the channel, xx is the key, yy the value, and zz the step time.
+
+0xDx 0xyy 0xzz
+Channel Pressure(Aftertouch). x is the channel, yy is the value, and zz is the step time.
+
+0xEx 0xyy 0xzz
+Pitch Bend Event. Low nibble of first byte is the channel, yy is the pitch value. To convert to
+midi's pitch wheel, just put the value in the second pitch byte(not the first). zz is the delta
+time.
+
+
+Last Notes
+-----------
+I wrote this document in a couple hours time so chances are, there's quite a few mistakes or 
+things mistakenly left out. If there's anything wrong, let me know. 
+
+
+
+Special Thanks
+---------------
+-To those still trying to make something out of Saturn
+-Marshall Gladstone for the docs and tools
+-segadev mailing for providing people with a source of information and interaction on Sega
+ system development
+
+
+
+Cyber Warrior X
+cwx@softhome.net
