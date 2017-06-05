@@ -60,6 +60,12 @@ how developers even made anything for the system.
  Not sure who exactly wrote it, but thanks anyways. 
 -Marshal Gladstone for all his documents and sample code
 
+Maintainer of this version:
+Misty De Meo
+mistydemeo@gmail.com
+
+Original author:
 
 Cyber Warrior X
 cwx@softhome.net
+http://cyberwarriorx.com/saturn-utilities
