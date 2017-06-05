@@ -58,4 +58,4 @@ extern unsigned long countD0; // Channel Pressure
 extern unsigned long countE0; // Pitch Bend
 
 //////////////////////////////////////////////////////////////////////////////
-int DecodeCnv(FILE *fp, char *output_filename);
+void DecodeCnv(FILE *fp, char *output_filename);

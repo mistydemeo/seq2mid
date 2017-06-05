@@ -56,7 +56,7 @@ unsigned long CheckTempoQueue(unsigned char *track_buffer);
 
 //////////////////////////////////////////////////////////////////////////////
 
-int DecodeCnv(FILE *fp, char *output_filename)
+void DecodeCnv(FILE *fp, char *output_filename)
 {
    int i=0;
    int done=0;
