@@ -230,25 +230,25 @@ int DecodeCnv(FILE *fp, char *output_filename)
    {
       printf("\nStatistics(number of calls)\n");
       printf("Number of Tempo Events: %d\n", header.num_tempo_events);
-      printf("Control Change: %d\n", countB0);
-      printf("Program Change: %d\n", countC0);
-      printf("Note On: %d\n", countNoteOn);
-      printf("Note On - Bit 1: %d\n", countNoteOnbit1);
-      printf("Queues: %d\n", countQueue);
-      printf("Note Off: %d\n", countNoteOff);
-      printf("Reference: %d\n", count81);
-      printf("Loop: %d\n", count82);
-      printf("Extend Gate(0x200): %d\n", count88);
-      printf("Extend Gate(0x800): %d\n", count89);
-      printf("Extend Gate(0x1000): %d\n", count8A);
-      printf("Extend Gate(0x2000): %d\n", count8B);
-      printf("Extend Delta(0x100): %d\n", count8C);
-      printf("Extend Delta(0x200): %d\n", count8D);
-      printf("Extend Delta(0x800): %d\n", count8E);
-      printf("Extend Delta(0x1000): %d\n", count8F);
-      printf("Polyphonic Pressure: %d\n", countA0);
-      printf("Channel Pressure: %d\n", countD0);
-      printf("Pitch Bend: %d\n\n", countE0);
+      printf("Control Change: %lu\n", countB0);
+      printf("Program Change: %lu\n", countC0);
+      printf("Note On: %lu\n", countNoteOn);
+      printf("Note On - Bit 1: %lu\n", countNoteOnbit1);
+      printf("Queues: %lu\n", countQueue);
+      printf("Note Off: %lu\n", countNoteOff);
+      printf("Reference: %lu\n", count81);
+      printf("Loop: %lu\n", count82);
+      printf("Extend Gate(0x200): %lu\n", count88);
+      printf("Extend Gate(0x800): %lu\n", count89);
+      printf("Extend Gate(0x1000): %lu\n", count8A);
+      printf("Extend Gate(0x2000): %lu\n", count8B);
+      printf("Extend Delta(0x100): %lu\n", count8C);
+      printf("Extend Delta(0x200): %lu\n", count8D);
+      printf("Extend Delta(0x800): %lu\n", count8E);
+      printf("Extend Delta(0x1000): %lu\n", count8F);
+      printf("Polyphonic Pressure: %lu\n", countA0);
+      printf("Channel Pressure: %lu\n", countD0);
+      printf("Pitch Bend: %lu\n\n", countE0);
    }
 
    // adjust file offset so it's 16-bit aligned again
@@ -805,7 +805,7 @@ unsigned long DecodeTrack(FILE *fp, unsigned char track_num, unsigned char *buff
       }
       else
       {
-         printf("unknown code: address %x, value %x\n", ftell(fp) - 1, ctl_byte);
+         printf("unknown code: address %lx, value %x\n", ftell(fp) - 1, ctl_byte);
 
          done = 1;
 
