@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "decode.h"
 
 //#define DEBUG 1
