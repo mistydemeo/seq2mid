@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
    int done=0;
    int i;
 
-   if (argc < 2 || strcmp(argv[1], "-h") || strcmp(argv[1], "--help") || strcmp(argv[1], "-help"))
+   if (argc < 2 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-help") == 0)
    {
       ProgramUsage();
       exit (1);
