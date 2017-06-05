@@ -1,9 +1,14 @@
+#include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #ifdef WIN32
 # include <dir.h>
 #else
 # include "dir_emu.h"
 #endif
+
 #include "decode.h"
 
 #define SLASH_STR "\\"
