@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #define MAX_TEMPO       256
 #define MAX_GATE_QUEUE  200
 #define MAX_TRACK_BUFFER_SIZE   1000000
@@ -54,3 +56,6 @@ extern unsigned long count8F; // EG 0x1000
 extern unsigned long countA0; // Polyphonic Pressure
 extern unsigned long countD0; // Channel Pressure
 extern unsigned long countE0; // Pitch Bend
+
+//////////////////////////////////////////////////////////////////////////////
+int DecodeCnv(FILE *fp, char *output_filename);

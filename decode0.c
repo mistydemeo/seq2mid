@@ -47,7 +47,6 @@ unsigned char disp_stats=0;
 
 //////////////////////////////////////////////////////////////////////////////
 
-int DecodeCnv(FILE *fp, char *output_filename);
 unsigned long DecodeTrack(FILE *fp, unsigned char track_num, unsigned char *buffer);
 char WriteDelta(unsigned char *track_buffer);
 unsigned long CheckGateQueue(unsigned char *track_buffer);
