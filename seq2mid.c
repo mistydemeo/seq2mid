@@ -1,5 +1,9 @@
 #include <stdio.h>
-#include <dir.h>
+#ifdef WIN32
+# include <dir.h>
+#else
+# include "dir_emu.h"
+#endif
 #include "decode.h"
 
 #define SLASH_STR "\\"
